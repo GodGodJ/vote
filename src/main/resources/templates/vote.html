@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>投票</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../static/css/me.css" th:href="@{/css/me.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <style>
+        .bag{
+            background-color: #228090 !important;
+        }
+
+    </style>
+</head>
+
+<script language="javascript">
+
+    function checkradiogroup( f ){
+        var f = f||document.forms[0], ro={};
+        for( var i=0, L=f.length; i<L; i++ ){
+            var fi=f.elements[i];
+            if( fi.nodeName==='INPUT' && fi.type==='radio' &&
+                fi.name && fi.name.length>0 && !fi.disabled ){
+
+                if( ro.hasOwnProperty(fi.name) && ro[fi.name]!=null ) continue;
+                ro[fi.name]= fi.checked ? fi.value : null;
+            }
+        }
+        for ( var j in ro ){
+            if(ro[j]==null){
+                alert('每组选项都须选择！');
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+
+
+</script>
+<body>
+
+
+<div class="m-container-small  m-padded-tb-massive" style="max-width: 30em !important;">
+    <form action="#" th:action="@{/results}" method="post" enctype="multipart/form-data" onsubmit="return checkradiogroup(this);">
+        <div class="ui container">
+
+        <div class="ui middle aligned center selection divided  list">
+            <h2 class="content" style="text-align: center !important;">
+                <span class="m-teal header">深圳市深圳技师学院校友会</span> <br>
+                <span class="m-teal">第二届理事会理事选票</span>
+                <br>
+            </h2>
+            <div th:each="council,councilStat:${councils}" class=" item" th:classappend="${councilStat.index%2==0}? 'bag'">
+
+                <div style="display: block !important;float: left !important;">
+                    <span th:text="${council.name}" >a</span>
+                </div>
+
+
+                <div style="display: block !important;float:right !important;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+                 同意&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio"   th:name="|result1[${councilStat.index}].result|"  th:value="1">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 不同意</label>&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio"  th:name="|result1[${councilStat.index}].result|"  th:value="2">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                 弃权&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio"  th:name="|result1[${councilStat.index}].result|"  th:value="3">
+                <input type="hidden" th:name="|result1[${councilStat.index}].name|" th:value="${council.number}">
+                </div>
+            </div>
+            <button class="ui  submit button" >投票</button>
+        </div>
+        </div>
+        <input type="hidden" name="number" th:value="${number}">
+
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../static/css/me.css" th:href="@{/css/me.css}"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+</head>
+<body>
+<div class="m-container-small  m-padded-tb-massive" style="max-width: 30em !important;">
+    <div class="ui middle aligned center selection list">
+        <h2 class="content" style="text-align: center !important;">
+            <span class="">深圳市深圳技师学院校友会</span> <br>
+            <span class="">第二届监事会监事选票结果</span>
+        </h2>
+        <div class="item content" th:each="council:${councils}">
+            <div style="display: block !important;float: left !important;">
+            <span th:text="${council.name}" class=""></span>
+            </div>
+            <div style="display: block !important;float: right !important;">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span th:text="${council.agree}" class=""></span>同意票
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span th:text="${council.against}" class=""></span>反对票
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span th:text="${council.Awaiver}" class=""></span>弃权票
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+
+        <h2 class="content" style="text-align: center !important;">
+            <span class="">深圳市深圳技师学院校友会</span> <br>
+            <span class="">第二届监事会监事监事长选票结果</span>
+        </h2>
+        <div class="item content" th:each="council:${councilss}">
+            <div style="display: block !important;float: left !important;">
+                <span th:text="${council.name}" class=""></span>
+            </div>
+            <div style="display: block !important;float: right !important;">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span th:text="${council.agree}" class=""></span>同意票
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span th:text="${council.against}" class=""></span>反对票
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <span th:text="${council.Awaiver}" class=""></span>弃权票
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</body>
+</html>
